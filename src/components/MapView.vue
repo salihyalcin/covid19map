@@ -6,7 +6,11 @@
 
 <script>
 import MapView from "@arcgis/core/views/MapView";
-import Map from "@arcgis/core/Map"; /*/*
+import Map from "@arcgis/core/Map";
+
+//import Extent from "@arcgis/core/geometry/Extent";
+
+/*/*
 import Bookmarks from "@arcgis/core/widgets/Bookmarks";
 import Expand from "@arcgis/core/widgets/Expand";*/
 
@@ -23,12 +27,22 @@ export default {
           },
         });*/
     // eslint-disable-next-line no-unused-vars
-    new MapView({
+    let view = new MapView({
       container: "map",
       map: map,
       zoom: 6,
       center: [10.3314223, 51.1469843]
     });
+
+ /*   view.extent = new Extent({
+      xmin: -9177882,
+      ymin: 4246761,
+      xmax: -9176720,
+      ymax: 4247967,
+      spatialReference: {
+        wkid: 102100
+      }
+    });*/
     /*  const bookmarks = new Bookmarks({
         view: view,
         // allows bookmarks to be added, edited, or deleted
