@@ -7,6 +7,7 @@
 <script>
 import MapView from "@arcgis/core/views/MapView";
 import Map from "@arcgis/core/Map";
+import GeoJSONLayer from "@arcgis/core/layers/GeoJSONLayer";
 
 //import Extent from "@arcgis/core/geometry/Extent";
 
@@ -33,6 +34,12 @@ export default {
       zoom: 6,
       center: [10.3314223, 51.1469843]
     });
+
+    const geoJSONLayer = new GeoJSONLayer({
+      url: "../assets/map.geojson",
+    });
+
+    map.add(geoJSONLayer)
 
  /*   view.extent = new Extent({
       xmin: -9177882,
