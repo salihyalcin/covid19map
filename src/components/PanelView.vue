@@ -3,9 +3,20 @@
 </template>
 
 <script>
+
 export default {
-  name: "PanelView"
+  name: "PanelView",
+  created() {
+    // Simple GET request using fetch
+    fetch(
+        "https://raw.githubusercontent.com/salihyalcin/map_assests/main/cases.json"
+    )
+        .then((response) => response.json())
+        .then((data) => console.log(data));
+  },
 }
+
+
 </script>
 
 <style scoped>

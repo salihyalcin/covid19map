@@ -9,24 +9,45 @@ import MapView from "@arcgis/core/views/MapView";
 import Map from "@arcgis/core/Map";
 import GeoJSONLayer from "@arcgis/core/layers/GeoJSONLayer";
 
-//import Extent from "@arcgis/core/geometry/Extent";
-
-/*/*
-import Bookmarks from "@arcgis/core/widgets/Bookmarks";
-import Expand from "@arcgis/core/widgets/Expand";*/
-
 export default {
   name: 'MapView',
+
   async mounted() {
     const map = new Map({
       basemap: "streets-vector"
     });
-    /*
-        const webmap = new WebMap({
-          portalItem: {
-            id: "aa1d3f80270146208328cf66d022e09c",
-          },
-        });*/
+
+    const template = {
+      title: "{NAME_2} Covid Status",
+      content: "Asdk",
+    };
+
+    // eslint-disable-next-line no-unused-vars
+    const renderer = {
+      type: "simple",
+      field: "NAME_2",
+      symbol: {
+        type: "simple-marker",
+        color: "orange",
+        outline: {
+          color: "white"
+        }
+      },
+      visualVariables: [{
+        type: "size",
+        field: "NAME_2",
+        stops: [{
+          value: 2.5,
+          size: "4px"
+        },
+          {
+            value: 8,
+            size: "40px"
+          }
+        ]
+      }]
+    };
+
     // eslint-disable-next-line no-unused-vars
     let view = new MapView({
       container: "map",
@@ -36,40 +57,15 @@ export default {
     });
 
     const geoJSONLayer = new GeoJSONLayer({
-      url: "../assets/map.geojson",
+      url: "https://raw.githubusercontent.com/salihyalcin/map_assests/main/map.geojson",
+      displayField:"NAME_2",
+      popupTemplate: template
+      //renderer: renderer
     });
 
     map.add(geoJSONLayer)
 
- /*   view.extent = new Extent({
-      xmin: -9177882,
-      ymin: 4246761,
-      xmax: -9176720,
-      ymax: 4247967,
-      spatialReference: {
-        wkid: 102100
-      }
-    });*/
-    /*  const bookmarks = new Bookmarks({
-        view: view,
-        // allows bookmarks to be added, edited, or deleted
-        editingEnabled: true,
-      });
-      const bkExpand = new Expand({
-        view: view,
-        content: bookmarks,
-        expanded: true,
-      });
-      // Add the widget to the top-right corner of the view
-      view.ui.add(bkExpand, "top-right");
-      // bonus - how many bookmarks in the webmap?
-      webmap.when(function () {
-        if (webmap.bookmarks && webmap.bookmarks.length) {
-          console.log("Bookmarks: ", webmap.bookmarks.length);
-        } else {
-          console.log("No bookmarks in this webmap.");
-        }
-      });*/
+
   }
 }
 </script>

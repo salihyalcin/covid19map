@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@arcgis/core": "^4.19.3",
+    "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "vue": "^2.6.11"
   },
