@@ -1,19 +1,26 @@
 <template>
   <div id="app">
     <MapView />
-    <PanelView />
+    <LeftPanelView/>
+    <RightPanelView/>
+    <FooterView/>
   </div>
 </template>
 
 <script>
 import MapView from './components/MapView.vue'
-import PanelView from "@/components/PanelView";
+import RightPanelView from "@/components/RightPanelView";
+import LeftPanelView from "@/components/LeftPanelView";
+import FooterView from "@/components/FooterView";
+
 
 export default {
   name: 'App',
   components: {
-    PanelView,
-    MapView
+    LeftPanelView,
+    MapView,
+    RightPanelView,
+    FooterView
   }
 
 }
@@ -26,4 +33,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
 }
+
+
 </style>

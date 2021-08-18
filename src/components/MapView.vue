@@ -1,5 +1,6 @@
 <template>
   <div id="map">
+    {{ info }}
   </div>
 
 </template>
@@ -11,21 +12,29 @@ import GeoJSONLayer from "@arcgis/core/layers/GeoJSONLayer";
 
 export default {
   name: 'MapView',
+  /*created() {
+    // Simple GET request using fetch
+    fetch(
+        "https://raw.githubusercontent.com/salihyalcin/map_assests/main/cases.json"
+    )
+        .then((response) => response.json())
+        .then((data) => console.log(data));
+  },*/
 
   async mounted() {
-    const map = new Map({
+     const map = new Map({
       basemap: "streets-vector"
     });
 
     const template = {
-      title: "{NAME_2} Covid Status",
+      title: "{name} Covid Status",
       content: "Asdk",
     };
 
     // eslint-disable-next-line no-unused-vars
     const renderer = {
       type: "simple",
-      field: "NAME_2",
+      field: "name",
       symbol: {
         type: "simple-marker",
         color: "orange",
@@ -52,13 +61,13 @@ export default {
     let view = new MapView({
       container: "map",
       map: map,
-      zoom: 6,
+      zoom: 5,
       center: [10.3314223, 51.1469843]
     });
 
     const geoJSONLayer = new GeoJSONLayer({
-      url: "https://raw.githubusercontent.com/salihyalcin/map_assests/main/map.geojson",
-      displayField:"NAME_2",
+      url: "https://raw.githubusercontent.com/isellsoap/deutschlandGeoJSON/main/2_bundeslaender/4_niedrig.geo.json",
+      displayField: "name",
       popupTemplate: template
       //renderer: renderer
     });
@@ -76,24 +85,6 @@ export default {
 
 html,
 body,
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  padding: 0;
-  margin: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.main_view {
-  padding: 0;
-  margin: 0;
-  width: 100%;
-  height: 100%;
-}
 
 #map {
   padding: 0;
