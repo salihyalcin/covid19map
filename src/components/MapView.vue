@@ -9,6 +9,7 @@
 import MapView from "@arcgis/core/views/MapView";
 import Map from "@arcgis/core/Map";
 import GeoJSONLayer from "@arcgis/core/layers/GeoJSONLayer";
+import LabelClass from "@arcgis/core/layers/support/LabelClass";
 
 export default {
   name: 'MapView',
@@ -26,10 +27,16 @@ export default {
       basemap: "streets-vector"
     });
 
-    const template = {
+    const stateTemplate = {
       title: "{name} Covid Status",
-      content: "Asdk",
+      content: "Test",
     };
+
+    const countyTemplate = {
+      title: "{NAME_2} Covid Status",
+      content: "Test",
+    };
+
 
     // eslint-disable-next-line no-unused-vars
     const renderer = {
@@ -65,14 +72,60 @@ export default {
       center: [10.3314223, 51.1469843]
     });
 
-    const geoJSONLayer = new GeoJSONLayer({
+    const statesLayer = new GeoJSONLayer({
       url: "https://raw.githubusercontent.com/isellsoap/deutschlandGeoJSON/main/2_bundeslaender/4_niedrig.geo.json",
       displayField: "name",
-      popupTemplate: template
+      popupTemplate: stateTemplate,
+      label : "sadasf"
       //renderer: renderer
     });
 
-    map.add(geoJSONLayer)
+    const countiesLayer = new GeoJSONLayer({
+      url: "https://raw.githubusercontent.com/salihyalcin/map_assests/main/map.geojson",
+      displayField: "name",
+      popupTemplate: countyTemplate
+    });
+
+    statesLayer.labelingInfo = new LabelClass({
+      labelExpressionInfo: { expression: "$feature.name" },
+      symbol: {
+        type: "text",  // autocasts as new TextSymbol()
+        color: "black",
+        haloSize: 1,
+        haloColor: "white"
+      }
+    });
+
+
+    countiesLayer.labelingInfo = new LabelClass({
+      labelExpressionInfo: {expression: "$feature.NAME_2"},
+      symbol: {
+        type: "text",  // autocasts as new TextSymbol()
+        color: "black",
+        haloSize: 1,
+        haloColor: "white"
+      }
+    })
+
+    view.watch("zoom", (newValue) => {
+      if(newValue >= 7){
+        countiesLayer.visible = true
+        countiesLayer.labelsVisible = true
+        statesLayer.visible = false
+        statesLayer.labelsVisible = false
+      }
+      else{
+        countiesLayer.visible = false
+        countiesLayer.visible = false
+        statesLayer.visible = true
+        statesLayer.labelsVisible = true
+      }
+    });
+
+    map.add(countiesLayer)
+    countiesLayer.labelsVisible = false
+    map.add(statesLayer)
+
 
 
   }
