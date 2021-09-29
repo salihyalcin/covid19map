@@ -55,6 +55,7 @@ export default {
       }]
     };
     //deployment vercel
+    //test vercel
     // eslint-disable-next-line no-unused-vars
     let view = new MapView({
       container: "map",
