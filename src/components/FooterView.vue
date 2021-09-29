@@ -20,7 +20,7 @@ export default {
   left: 0;
   border-radius: 10px;
   right: 0;
-  width: 68%;
+  width: fit-content;
   background-color: white;
   height: 20%;
 }

@@ -1,6 +1,6 @@
 <template>
   <div id="map">
-    {{ info }}
+<!--  {{ info }}-->
   </div>
 
 </template>
@@ -13,15 +13,6 @@ import LabelClass from "@arcgis/core/layers/support/LabelClass";
 
 export default {
   name: 'MapView',
-  /*created() {
-    // Simple GET request using fetch
-    fetch(
-        "https://raw.githubusercontent.com/salihyalcin/map_assests/main/cases.json"
-    )
-        .then((response) => response.json())
-        .then((data) => console.log(data));
-  },*/
-
   async mounted() {
      const map = new Map({
       basemap: "streets-vector"

@@ -10,7 +10,7 @@
       <div v-if="loading">Loading...</div>
 
       <div
-          v-bind:key="cases"
+          v-bind:key="cases.name"
           v-for="cases in info"
           class="case"
       >
@@ -38,7 +38,6 @@ export default {
   },
   mounted() {
     axios
-       // .get('https://raw.githubusercontent.com/salihyalcin/map_assests/main/cases.json')
         .get('https://raw.githubusercontent.com/salihyalcin/map_assests/main/cases.json')
         .then(response => {
           this.info = response.data
@@ -67,7 +66,7 @@ export default {
   margin: 10px;
   position: absolute;
   top: 0;
-  width: 15%;
+  width: fit-content;
   background-color: white;
   height: 100%;
   border-radius: 10px;
