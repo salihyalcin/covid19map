@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <MapView />
+    <git MapView />
     <LeftPanelView/>
     <RightPanelView/>
     <FooterView/>
@@ -13,14 +13,13 @@ import RightPanelView from "@/components/RightPanelView";
 import LeftPanelView from "@/components/LeftPanelView";
 import FooterView from "@/components/FooterView";
 
-
 export default {
   name: 'App',
   components: {
     LeftPanelView,
     MapView,
     RightPanelView,
-    FooterView
+    FooterView,
   }
 
 }
