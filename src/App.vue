@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <git MapView />
+    <MapView />
     <LeftPanelView/>
     <RightPanelView/>
     <FooterView/>

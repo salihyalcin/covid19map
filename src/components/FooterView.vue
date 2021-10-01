@@ -1,17 +1,22 @@
 <template>
 <div class="footer">
-  <apexchart v-if="getGermanyData" type="line" width= "850" height="190" :options="chartOptions" :series="getTimeSeriesData"></apexchart>
+  <ApexCharts v-if="getGermanyData" type="line" width= "850" height="190" :options="chartOptions" :series="getTimeSeriesData"></ApexCharts>
 </div>
 </template>
 
 <script>
 import axios from 'axios'
+import ApexCharts from 'apexcharts'
+
 export default {
   name: 'FooterView',
   data () {
     return {
       data: null,
     }
+  },
+  components: {
+    ApexCharts
   },
   computed: {
     getGermanyData() {
