@@ -132,11 +132,9 @@ html,
 body,
 
 #map {
-  padding: 0;
-  margin: 0;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  bottom: 0;
+  width: 55%;
+  height: 70%;
+  float: left;
+  border-collapse: collapse;
 }
 </style>

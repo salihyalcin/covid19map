@@ -62,13 +62,9 @@ export default {
 
 <style scoped>
 .left_panel_view {
-  padding: 0;
-  margin: 10px;
-  position: absolute;
-  top: 0;
-  width: fit-content;
-  background-color: white;
+  width: 22.5%;
   height: 100%;
-  border-radius: 10px;
+  float: left;
+  border-collapse: collapse;
 }
 </style>
