@@ -1,6 +1,6 @@
 <template>
 <div class="footer">
-  <apexchart v-if="getGermanyData" type="line" width= "850" height="190" :options="chartOptions" :series="getTimeSeriesData"></apexchart>
+  <apexchart class="data-graph" v-if="getGermanyData" type="line" width= "950" height="190" :options="chartOptions" :series="getTimeSeriesData"></apexchart>
 </div>
 </template>
 
@@ -86,17 +86,16 @@ body {
 }
 
 .footer {
-  padding: 0;
-  bottom: 0;
-  position: absolute;
-  margin-left: auto;
-  margin-right: auto;
-  left: 0;
-  border-radius: 05px;
-  right: 0;
-  width: 68%;
-  background-color: white;
-  height: 32%;
+  width: 50%;
+  height: 30%;
+  border-collapse: collapse;
+  float: left;
+}
+.data-graph {
+  width: 50%;
+  height: 30%;
+  border-collapse: collapse;
+  float: left;
 }
 
 </style>

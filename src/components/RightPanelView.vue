@@ -1,20 +1,10 @@
 <template>
   <div class="right_panel_view">
-    <h3>Total Cases - World</h3>
+    <h4>Last Update : {{lastUpdate}}</h4>
 
     <h4>Vaccination Status</h4>
-<!--    <ul>
-      <li v-bind:key="vaccination.id"
-          v-for="vaccination in vaccinations">
-        {{ vaccination.name }}  {{ vaccination.fullyVaccinated.quote }}
-      </li>
-    </ul>-->
 
     <b-table striped hover :items="vaccinations" :fields="fields"></b-table>
-
-<!--    <div>
-      <b-table striped hover :items="items"></b-table>
-    </div>-->
 
   </div>
 </template>
@@ -29,15 +19,16 @@ export default {
       vaccinations: null,
       loading: true,
       errored: false,
-      fields : [
+      lastUpdate : null,
+      fields: [
         {
           key: 'name',
-          label :'Name',
+          label: 'Name',
           sortable: true
         },
         {
           key: 'fullyVaccinated.quote',
-          label : 'Fully Vaccinated %',
+          label: 'Fully Vaccinated %',
           sortable: true
         },
         {
@@ -45,15 +36,16 @@ export default {
           label: 'Vaccinated Once %',
           sortable: true
         }
-        ]
+      ]
     }
   },
   mounted() {
     axios
         .get('https://rki-vaccination-data.vercel.app/api/v2')
         .then(response => {
-          this.vaccinations = response.data.data
-          console.log(this.vaccinations)
+          this.vaccinations = response.data.data.filter(vacc => vacc.isState)
+          this.vaccinations.push(response.data.data.at(-1))
+          this.lastUpdate = response.data.lastUpdate
         })
         .catch(error => {
           console.log(error)
@@ -68,15 +60,11 @@ export default {
 <style scoped>
 
 .right_panel_view {
-  padding: 0;
-  margin: 10px;
-  right: 0;
-  position: absolute;
-  width:fit-content;
-  background-color: white;
+  width: 22.5%;
   height: 100%;
-  border-radius: 10px;
-
+  position: relative;
+  float: right;
+  border-collapse: collapse;
 }
 
 ::v-deep .sr-only{display:none !important}
