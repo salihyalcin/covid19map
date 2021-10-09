@@ -1,12 +1,11 @@
 <template>
 <div class="footer">
-  <apexchart class="data-graph" v-if="getGermanyData" type="line" width= "950" height="190" :options="chartOptions" :series="getTimeSeriesData"></apexchart>
+  <apexchart class="data-graph" v-if="getGermanyData" type="line" width= "1000" height="190" :options="chartOptions" :series="getTimeSeriesData"></apexchart>
 </div>
 </template>
 
 <script>
 import axios from 'axios'
-import ApexCharts from 'apexcharts'
 
 export default {
   name: 'FooterView',
@@ -14,9 +13,6 @@ export default {
     return {
       data: null,
     }
-  },
-  components: {
-    ApexCharts
   },
   computed: {
     getGermanyData() {

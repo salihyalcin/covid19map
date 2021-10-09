@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <MapView />
     <LeftPanelView/>
+    <MapView />
     <RightPanelView/>
     <FooterView/>
   </div>

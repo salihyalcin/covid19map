@@ -1,8 +1,8 @@
 <template>
   <div class="right_panel_view">
-    <h4>Last Update : {{lastUpdate}}</h4>
+    <h5>Last Update : {{lastUpdate}}</h5>
 
-    <h4>Vaccination Status</h4>
+    <h5>Vaccination Status</h5>
 
     <b-table striped hover :items="vaccinations" :fields="fields"></b-table>
 
