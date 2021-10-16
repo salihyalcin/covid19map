@@ -51,7 +51,7 @@ export default {
           console.log(error)
         })
     //  .finally(() => this.loading = false)
-  }
+  },
 }
 
 
