@@ -18,7 +18,6 @@ export default {
     return {
       vaccinations: null,
       loading: true,
-      errored: false,
       lastUpdate : null,
       fields: [
         {
