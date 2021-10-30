@@ -31,6 +31,7 @@ export default {
     axios
         .get('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/' + this.requestDate() + '.csv')
         .then(response => {
+          //Returning response to the JSON format
           const input = response.data
           const lines = input.split('\n') // 1️⃣
           const header = lines[0].split(',') // 2️⃣
@@ -38,16 +39,22 @@ export default {
             const fields = line.split(',') // 3️⃣
             return Object.fromEntries(header.map((h, i) => [h, fields[i]])) // 4️⃣
           })
+
+          //Filtering json according to the region which is Germany for our scenario
           this.totalCases = output.filter(vacc => vacc.Country_Region === "Germany" && vacc.Lat !== "")
+
+          //Formatting case numbers to the meaningful K format which is 1000 = 1K
           const formatCash = n => {
             if (n < 1e3) return n;
             if (n >= 1e3) return +(n / 1e3).toFixed(1) + "K";
           };
 
-          var reformatCases = function (caseNumbers) {
+
+        //Reformatting case for TableView as well as their attributes.
+          const reformatCases = function (caseNumbers) {
             return caseNumbers.map(function (cas) {
               // create a new object to store full name.
-              var newObj = {};
+              let newObj = {};
               newObj["Province_State"] = cas.Province_State;
               newObj["Confirmed"] = formatCash(parseInt(cas.Confirmed));
               newObj["Deaths"] = formatCash(parseInt(cas.Deaths));
@@ -58,6 +65,7 @@ export default {
           this.totalCases = reformatCases(this.totalCases)
         })
         .catch(error => {
+          //Catching the errors.
           console.log(error)
         })
   },

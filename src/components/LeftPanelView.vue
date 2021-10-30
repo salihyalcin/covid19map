@@ -2,14 +2,7 @@
   <div class="left_panel_view">
     <h3>Total Cases - Germany</h3>
     <p>{{ currentDate() }}</p>
-    <section v-if="errored">
-      <p>We're sorry, we're not able to retrieve this information at the moment, please try back later</p>
-    </section>
-
-    <section v-else>
-      <b-table striped hover :items="cases" :fields="fields"></b-table>
-
-    </section>
+    <b-table striped hover :items="cases" :fields="fields"></b-table>
   </div>
 </template>
 

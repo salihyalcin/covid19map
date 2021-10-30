@@ -1,8 +1,6 @@
 <template>
   <div id="map">
-    <!--  {{ info }}-->
   </div>
-
 </template>
 
 <script>
@@ -10,8 +8,6 @@ import MapView from "@arcgis/core/views/MapView";
 import Map from "@arcgis/core/Map";
 import GeoJSONLayer from "@arcgis/core/layers/GeoJSONLayer";
 import LabelClass from "@arcgis/core/layers/support/LabelClass";
-/*import Query from "@arcgis/core/tasks/support/Query";
-import * as queryChargingStationsTask from "@arcgis/core/core/workers/request";*/
 
 export default {
   name: 'MapView',
@@ -26,7 +22,7 @@ export default {
     const stateTemplate = {
       //  test : this.cases[this.cases.findIndex(el => el.Province_State==={name})].Confirmed,
       title: "{name} Covid Status",
-      content: populationChange,
+      content: showPopupInformation,
     };
     // this.counties[filtered].Confirmed
     /*   const countyTemplate = {
@@ -121,25 +117,13 @@ export default {
     countiesLayer.labelsVisible = false
     map.add(statesLayer)
 
-
     //console.log(this.cases[this.cases.findIndex(el => el.Province_State==="Berlin")].Confirmed)
 
-    function populationChange(feature) {
-      const div = document.createElement("div");
-      //const upArrow = '<svg width="16" height="16" ><polygon points="14.14 7.07 7.07 0 0 7.07 4.07 7.07 4.07 16 10.07 16 10.07 7.07 14.14 7.07" style="fill:green"/></svg>';
-      //  const downArrow = '<svg width="16" height="16"><polygon points="0 8.93 7.07 16 14.14 8.93 10.07 8.93 10.07 0 4.07 0 4.07 8.93 0 8.93" style="fill:red"/></svg>';
-
-      // Calculate the population percent change from 2010 to 2013.
-     // const diff = feature.graphic.attributes.POP2013 - feature.graphic.attributes.POP2010;
-      //const arrow = diff > 0 ? upArrow : downArrow;
-
-      // Add green arrow if the percent change is positive and a red arrow for negative percent change.
-      div.innerHTML =
-          "As of 2010, the total population in this area was <b>" + feature.name + "</b> and the density was <b>" + feature.graphic.attributes.POP10_SQMI + "</b> sq mi. As of 2013, the total population was <b>" + feature.graphic.attributes.POP2013 + "</b> and the density was <b>" + feature.graphic.attributes.POP13_SQMI + "</b> sq mi. <br/> <br/>" +
-          "Percent change is " +
-          feature.name +
-          "<span style='color: ";
-      return div;
+    function showPopupInformation(feature) {
+      console.log(this.cases)
+      console.log(feature.graphic.attributes.name)
+      console.log(this.cases.findIndex(el => el.Province_State===feature.graphic.attributes.name))
+      console.log(this.cases[this.cases.findIndex(el => el.Province_State===feature.graphic.attributes.name)].Confirmed)
     }
 
   }
