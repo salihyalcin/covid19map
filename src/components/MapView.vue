@@ -15,6 +15,7 @@ export default {
     cases: Array
   },
   async mounted() {
+    //Creating basemap
     const map = new Map({
       basemap: "streets-vector"
     });
@@ -55,9 +56,8 @@ export default {
         ]
       }]
     };
-    //deployment vercel
-    //test vercel
-    // eslint-disable-next-line no-unused-vars
+
+    //Creating mapView that holds our Map
     let mapView = new MapView({
       container: "map",
       map: map,
@@ -65,6 +65,7 @@ export default {
       center: [10.3314223, 51.1469843]
     });
 
+    //Initializing states layer as GeoJSONLayer
     const statesLayer = new GeoJSONLayer({
       url: "https://raw.githubusercontent.com/isellsoap/deutschlandGeoJSON/main/2_bundeslaender/4_niedrig.geo.json",
       displayField: "name",
@@ -72,6 +73,7 @@ export default {
       //renderer: renderer
     });
 
+    //Initializing counties layer as GeoJSONLayer
     const countiesLayer = new GeoJSONLayer({
       url: "https://raw.githubusercontent.com/salihyalcin/map_assests/main/map.geojson",
       displayField: "name"
@@ -97,7 +99,7 @@ export default {
         haloColor: "white"
       }
     })
-
+    //Zooming out zooming in - Arranging layers.
     mapView.watch("zoom", (newValue) => {
       if (newValue >= 7) {
         countiesLayer.visible = true
