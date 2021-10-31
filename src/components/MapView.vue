@@ -10,20 +10,26 @@ import GeoJSONLayer from "@arcgis/core/layers/GeoJSONLayer";
 import LabelClass from "@arcgis/core/layers/support/LabelClass";
 
 export default {
+  data() {
+    return {
+      germanyCases: null
+    }
+  },
   name: 'MapView',
   props: {
     cases: Array
   },
   async mounted() {
+    const self = this
     //Creating basemap
     const map = new Map({
       basemap: "streets-vector"
     });
-
+    this.germanyCases = this.cases
     const stateTemplate = {
       //  test : this.cases[this.cases.findIndex(el => el.Province_State==={name})].Confirmed,
       title: "{name} Covid Status",
-      content: showPopupInformation,
+      content: showPopupInformation
     };
     // this.counties[filtered].Confirmed
     /*   const countyTemplate = {
@@ -119,13 +125,22 @@ export default {
     countiesLayer.labelsVisible = false
     map.add(statesLayer)
 
+    for (let i = 0; i < this.cases.length; i++) {
+      this.cases[i].Province_State = this.cases[i].Province_State.replace('ü', 'u');
+    }
+
+
     //console.log(this.cases[this.cases.findIndex(el => el.Province_State==="Berlin")].Confirmed)
 
     function showPopupInformation(feature) {
-      console.log(this.cases)
-      console.log(feature.graphic.attributes.name)
-      console.log(this.cases.findIndex(el => el.Province_State===feature.graphic.attributes.name))
-      console.log(this.cases[this.cases.findIndex(el => el.Province_State===feature.graphic.attributes.name)].Confirmed)
+      const div = document.createElement("div");
+
+      const selectedState = feature.graphic.attributes.name.replace("ü", "u")
+
+      div.innerHTML = "Total case number : "+ self.cases[self.cases.findIndex(el => (el.Province_State) === selectedState)].Confirmed;
+      return div;
+
+
     }
 
   }

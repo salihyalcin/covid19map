@@ -11,7 +11,6 @@
 export default {
   data() {
     return {
-      errored: false,
       fields: [
         {
           key: 'Province_State',
