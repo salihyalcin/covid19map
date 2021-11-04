@@ -72,7 +72,8 @@ export default {
   methods: {
     requestDate() {
       const current = new Date();
-      return `${current.getMonth() + 1}-${current.getDate() - 1}-${current.getFullYear()}`;
+      const day = current.getDate() - 1
+      return `${("0"+(current.getMonth()+1)).slice(-2)}-${("0" + day).slice(-2)}-${current.getFullYear()}`;
     }
   }
 
