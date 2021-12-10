@@ -1,7 +1,7 @@
 <template>
-<div class="footer">
-  <apexchart class="data-graph" v-if="getGermanyData" type="line" width= "1000" height="190" :options="chartOptions" :series="getTimeSeriesData"></apexchart>
-</div>
+  <div class="footer">
+    <apexchart class="data-graph" v-if="getGermanyData" type="line" width= "100%" height="190" :options="chartOptions" :series="getTimeSeriesData"></apexchart>
+  </div>
 </template>
 
 <script>
@@ -17,7 +17,8 @@ export default {
   computed: {
     getGermanyData() {
       if (this.data) {
-        return this.data["Germany"]
+        //return this.data["Germany"]
+        return this.data
       } else {
         return null
       }
@@ -25,7 +26,7 @@ export default {
     getDates() {
       if (this.getGermanyData) {
         const dates = []
-        this.getGermanyData.forEach(({date}) => dates.push(date))
+        this.getGermanyData.forEach(({Date}) => dates.push(Date))
         return dates
       } else {
         return null
@@ -41,9 +42,9 @@ export default {
         //   recoveredData.push(recovered)
         //   deathsData.push(deaths)
         // })
-        this.getGermanyData.forEach(({confirmed, deaths}) => {
-          confirmedData.push(confirmed)
-          deathsData.push(deaths)
+        this.getGermanyData.forEach(({Confirmed, Deaths}) => {
+          confirmedData.push(Confirmed)
+          deathsData.push(Deaths)
         })
         return [
           {
@@ -67,14 +68,18 @@ export default {
       return {
         xaxis: {
           categories: this.getDates,
-          tickAmount: 7
+          //tickAmount: 15,
+          type: 'datetime'
         }
       }
     },
   },
   mounted() {
-    axios.get("https://pomber.github.io/covid19/timeseries.json")
-      .then( ({ data }) => { this.data = data})
+    // axios.get("https://pomber.github.io/covid19/timeseries.json")
+    //   .then( ({ data }) => { this.data = data})
+
+    axios.get("https://api.covid19api.com/country/germany?from=2019-03-01T00:00:00Z&to=2022-04-01T00:00:00Z")
+        .then( ({ data }) => { this.data = data})
   }
 }
 </script>
@@ -87,13 +92,13 @@ body {
 }
 
 .footer {
-  width: 50%;
+  width: 55%;
   height: 30%;
   border-collapse: collapse;
   float: left;
 }
 .data-graph {
-  width: 50%;
+  width: 100%;
   height: 30%;
   border-collapse: collapse;
   float: left;
