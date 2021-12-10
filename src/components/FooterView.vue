@@ -68,7 +68,8 @@ export default {
       return {
         xaxis: {
           categories: this.getDates,
-          tickAmount: 7
+          //tickAmount: 15,
+          type: 'datetime'
         }
       }
     },
