@@ -81,7 +81,7 @@ export default {
 
     //Initializing counties layer as GeoJSONLayer
     const countiesLayer = new GeoJSONLayer({
-      url: "https://raw.githubusercontent.com/salihyalcin/map_assests/main/map.geojson",
+      url: "https://raw.githubusercontent.com/salihyalcin/covid19map/master/map.geojson",
       displayField: "name"
       // popupTemplate: countyTemplate
     });
